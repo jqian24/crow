@@ -57,18 +57,12 @@ public class City
 	}
 
 	// When a new city is created, store this new city to the file
-	public static void AddCity(City cityAdded, PrintWriter output) throws FileNotFoundException
+	public static void AddCity(City cityAdded, PrintWriter output)
 	{
 		output.print(cityAdded.state);
 		output.print(cityAdded.city);
-		output.print(cityAdded.latitude);
-		output.print(cityAdded.longitude);
-	}
-
-	public static void AddOldFile(String old, String filename) throws FileNotFoundException
-	{
-		PrintWriter output = new PrintWriter(new File(filename));
-		output.println(old);
+		output.print(Double.toString(cityAdded.latitude));
+		output.print(Double.toString(cityAdded.longitude));
 	}
 	
 	public String toString()

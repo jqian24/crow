@@ -1,22 +1,18 @@
 import java.util.*;
 import java.io.*;
 
-public class Trip
-{
+public class Trip {
 	// data fields
-	private static ArrayList<City> citySelected;
-	private static double distance;
+	private ArrayList<City> citySelected;
 
 	// constructor
-	public Trip(ArrayList<City> citySelected)
-	{
+	public Trip(ArrayList<City> citySelected) {
 		this.citySelected = new ArrayList<City>();
 		this.citySelected = citySelected;
 	}
 
 	// calculate the distance
-	private double calculateDistance(City c1, City c2)
-	{
+	private static double calculateDistance(City c1, City c2) {
 		final int EARTH_RADIUS = 6371000;
 		double lad1 = Math.toRadians(c1.getLatitude());
 		double longd1 = Math.toRadians(c1.getLongitude());
@@ -27,38 +23,32 @@ public class Trip
 				* Math.sin((longd2 - longd1) / 2.0)
 				* Math.sin((longd2 - longd1) / 2.0);
 		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-		this.distance = EARTH_RADIUS * c;
-		return this.distance;
+		return EARTH_RADIUS * c;
 	}
 
 	// save trip details to a file
 	public void saveToFile(String whereToSave, Trip tripToSave)
-			throws FileNotFoundException
-	{
+			throws FileNotFoundException {
 		PrintWriter output = new PrintWriter(new File(whereToSave));
 		output.println(tripToSave.toString());
+		output.close();
 	}
 
-	public String toString()
-	{
+	public String toString() {
 		String retval = "";
 		double meterToMile = 0.00062137;
 		double accumulation = 0;
-		retval += "There are " + citySelected.size() + "cities in this trip.";
-		for (int i = 0; i < citySelected.size() - 1; i++)
-		{
+		retval += "There are " + citySelected.size() + "cities in this trip.\n";
+		for (int i = 0; i < citySelected.size(); i++) {
 			retval += citySelected.get(i).getCity() + " to "
-					+ citySelected.get(i + 1).getCity();
+					+ citySelected.get((i + 1) % citySelected.size()).getCity();
+			double distance = calculateDistance(citySelected.get(i),
+					citySelected.get((i + 1) % citySelected.size()));
 			retval += " as the crow files is about " + (int) distance
 					+ " meters" + "(~" + (int) (distance * meterToMile)
 					+ " miles)" + '\n';
 			accumulation += distance;
 		}
-		retval += citySelected.get(citySelected.size() - 1).getCity() + " to "
-				+ citySelected.get(0).getCity()
-				+ " as the crow files is about " + (int) distance + " meters"
-				+ "(~" + (int) (distance * meterToMile) + " miles)" + '\n';
-		accumulation += distance;
 		retval += "Total Distance: " + (int) accumulation + " meters (~"
 				+ (int) (accumulation * meterToMile) + " miles)";
 		return retval;
