@@ -75,36 +75,36 @@ public class AsTheCrowFiles {
 	//
 	// }
 
-	private static boolean numIsValidForLon(String input) {
-		char[] inputChar = input.toCharArray();
-		// check if it has the probability to be a negative no.
-		if (inputChar[0] == '-') {
-			for (int i = 1; i < inputChar.length; i++) {
-				// check if it is a negative no. or not a no. at all
-				if (inputChar[i] < '0' || inputChar[i] > '9') {
-					// when it is not a no.
-					System.out.println("Invalid input. Try again.");
-					return false;
-				}
-			}
-
-		}
-		// when input will not be a negative no.
-		for (int i = 0; i < inputChar.length; i++) {
-			if (inputChar[i] < '0' || inputChar[i] > '9') {
-				// when input is not no.
-				System.out.println("Invalid input. Try again.");
-				return false;
-			}
-		}
-		double lon = Double.parseDouble(input);
-		if (lon < -180.0 || lon > 180.0) {
-			return false;
-		}
-		// when input is a no.
-		return true;
-
-	}
+	// private static boolean numIsValidForLon(String input) {
+	// char[] inputChar = input.toCharArray();
+	// // check if it has the probability to be a negative no.
+	// if (inputChar[0] == '-') {
+	// for (int i = 1; i < inputChar.length; i++) {
+	// // check if it is a negative no. or not a no. at all
+	// if (inputChar[i] < '0' || inputChar[i] > '9') {
+	// // when it is not a no.
+	// System.out.println("Invalid input. Try again.");
+	// return false;
+	// }
+	// }
+	//
+	// }
+	// // when input will not be a negative no.
+	// for (int i = 0; i < inputChar.length; i++) {
+	// if (inputChar[i] < '0' || inputChar[i] > '9') {
+	// // when input is not no.
+	// System.out.println("Invalid input. Try again.");
+	// return false;
+	// }
+	// }
+	// double lon = Double.parseDouble(input);
+	// if (lon < -180.0 || lon > 180.0) {
+	// return false;
+	// }
+	// // when input is a no.
+	// return true;
+	//
+	// }
 
 	public static void main(String[] args) throws FileNotFoundException {
 		int choice;// the user input of the choice
